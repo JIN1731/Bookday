@@ -38,6 +38,7 @@ public class NCP_sms{
 			
 			//https://sens.apigw.ntruss.com/sms/v2/services/ncp:sms:kr:297260365853:book_day/messages
 			
+			
 			// JSON 을 활용한 body data 생성
 			JSONObject bodyJson = new JSONObject();
 			JSONObject toJson = new JSONObject();
@@ -46,7 +47,7 @@ public class NCP_sms{
 		   toJson.put("content","[책하루] \n 책하루 인증 번호는"+ "["+rand+"]"+"입니다.");	// Optional, messages.content	개별 메시지 내용, SMS: 최대 80byte, LMS, MMS: 최대 2000byte
 		   toJson.put("to",phone);						// Mandatory(필수), messages.to	수신번호, -를 제외한 숫자만 입력 가능
 		   toArr.add(toJson);
-		    
+		   
 		    bodyJson.put("type","SMS");							// Madantory, 메시지 Type (SMS | LMS | MMS), (소문자 가능)
 		    //bodyJson.put("countryCode","82");					// Optional, 국가 전화번호, (default: 82)
 		    bodyJson.put("from","01053793197");					// Mandatory, 발신번호, 사전 등록된 발신번호만 사용 가능		
@@ -60,13 +61,13 @@ public class NCP_sms{
 		    
 	        try {
 	            URL url = new URL(apiUrl);
-	            URLEncoder.encode(apiUrl, "UTF-8");
+	            //URLEncoder.encode(apiUrl, "UTF-8");
 
 	            HttpURLConnection con = (HttpURLConnection)url.openConnection();
 	            con.setUseCaches(false);
 	            con.setDoOutput(true);
 	            con.setDoInput(true);
-	            con.setRequestProperty("content-type", "application/json;charset=utf-8");
+	            con.setRequestProperty("content-type", "application/json");
 	            con.setRequestProperty("x-ncp-apigw-timestamp", timestamp);
 	            con.setRequestProperty("x-ncp-iam-access-key", accessKey);
 	            con.setRequestProperty("x-ncp-apigw-signature-v2", makeSignature(requestUrl, timestamp, method, accessKey, secretKey));
@@ -74,9 +75,8 @@ public class NCP_sms{
 	            con.setDoOutput(true);
 	            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 	       
-	            //con.getOutputStream(),"UTF-8")
-	            
-	            wr.write(body.getBytes());
+	            //wr.write(body.getBytes());
+	            wr.write(body.getBytes("utf-8"));
 	            wr.flush();
 	            wr.close();
 
@@ -85,9 +85,9 @@ public class NCP_sms{
 	            System.out.println("responseCode" +" " + responseCode);
 	            if(responseCode == 202) { // 정상 호출
 	            	
-	            	 br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
-	                //br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-	            	 
+	            	//br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
+	                br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+	                
 	            } else { // 에러 발생
 	                br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
 	            }
@@ -95,9 +95,8 @@ public class NCP_sms{
 	            String inputLine;
 	            StringBuffer response = new StringBuffer();
 	            while ((inputLine = br.readLine()) != null) {
-	            	
-	            	response.append(new String(URLDecoder.decode(inputLine, "UTF-8")));
-	                //response.append(inputLine);
+	            	response.append(inputLine);
+	            	//response.append(new String(URLDecoder.decode(inputLine, "UTF-8")));
 	            }
 	            br.close();
 	            
@@ -112,7 +111,6 @@ public class NCP_sms{
 		public String makeSignature(String url,String timestamp,String method, String accessKey, String secretKey) throws NoSuchAlgorithmException, InvalidKeyException {
 		String space=" ";
 		String newLine = "\n";
-		
 		
 		String message = new StringBuilder()
 			.append(method)
@@ -138,7 +136,6 @@ public class NCP_sms{
 			}
 			return encodeBase64String;
 			}
-
 		
 		}
 	

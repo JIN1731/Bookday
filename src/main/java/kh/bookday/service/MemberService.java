@@ -115,7 +115,7 @@ public class MemberService {
 	public String getAccessToken(String code) {
 		String access_Token="";
 		String refresh_Token="";
-		//String content_type="application/x-www-form-urlencoded";
+		String content_type="application/x-www-form-urlencoded";
 		String grant_type="grant_type=authorization_code";
 		String client_id="&client_id=5d39c4a90d2cd9ef1649a8e6108ba988";
 
@@ -128,7 +128,7 @@ public class MemberService {
 		try {
 			//카카오 서버랑 연결하기 위한 url 선언
 			URL url = new URL(reqURL);
-			 URLEncoder.encode(reqURL, "UTF-8");
+			URLEncoder.encode(reqURL, "UTF-8");
 
 			//http 연결
 			HttpURLConnection conn= (HttpURLConnection) url.openConnection();
@@ -140,7 +140,7 @@ public class MemberService {
 			//outputstreamWriter에 출력 스트림 연결 후 버퍼라이터에 인스턴스 생성  //이미 아웃풋 스트림이 있는데 버퍼를 쓰는 이유는?
 			BufferedWriter bw= new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
-			//sb.append(content_type);
+			sb.append(content_type);
 			sb.append(grant_type);
 			sb.append(client_id);
 			sb.append(redirect_uri);
@@ -211,7 +211,7 @@ public class MemberService {
 			System.out.println("유저 정보 조회 요청 코드:"+responsecode);
 
 			//값 읽어오기
-			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));
+			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
 
 			String line="";
 			String result ="";
@@ -219,6 +219,7 @@ public class MemberService {
 			while((line=br.readLine()) != null){
 				result += line;
 			}
+			
 			System.out.println("response body: "+result);
 
 			//json으로 값 파싱
