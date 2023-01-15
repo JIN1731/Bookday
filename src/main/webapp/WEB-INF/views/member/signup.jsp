@@ -189,11 +189,13 @@ $(document).ready(function(){
 	$("#signup_btn").attr("disabled", true);
 	//인증번호 입력 창도 비활성화
 	$("#verifi_code").attr("readonly", true); 
+	//인증번호 관련 결과값
+	let result;
 	
 	$("#name, #nickname, #phone,#verifi_code,#email,#pw,#check_pw")
     .on("keyup",function(){
     	
-	let name= $("#name").val();
+	 let name= $("#name").val();
      let nickname=$("#nickname").val();
      let phone=$("#phone").val();
      let verifi_code=$("#verifi_code").val();
@@ -211,7 +213,7 @@ $(document).ready(function(){
     	verifi_code=="" || email=="" || pw=="" || check_pw==""
     	|| !nameRegex.test(name) || !nicknameRegex.test(nickname) 
         || !phoneRegex.test(phone) || !emailRegex.test(email) 
-        || !pwRegex.test(pw)){
+        || !pwRegex.test(pw) || result == false){
            //위의 값이 안 맞으면 로그인 버튼 아예 못 누름
            $("#signup_btn").attr("disabled", true);
            console.log("버튼 비활성화");
@@ -220,7 +222,7 @@ $(document).ready(function(){
         	   $("#signup_btn").attr("disabled", false);
            }
      
-     console.log(name+":"+nickname+":"+phone+":"+verifi_code+":"+email+":1"+pw+":2"+check_pw);
+     console.log(name+":"+nickname+":"+phone+":"+verifi_code+":"+email+":1"+pw+":2"+check_pw+result);
     });
 	
 	$("#phone").on("blur",function(){
@@ -254,83 +256,100 @@ $(document).ready(function(){
               
                 //$("#phone").attr("readonly", true); 
                 
-                $("#phone").on("input",function(){
+              /*   $("#phone").on("input",function(){
                 	alert("핸드폰 번호를 다시 입력합니다.");
                 	location.reload();
-                });
+                }); */
               
-                $("#verfi_btn").on("click", function(){	
-                	
-                	/* if(confirm("인증하시겠습니까?")){ */
-                		//인증 번호 발송되는 에이작스
-                		 $.ajax({
-                            url: "/member/createAuthNum",
-                             data: {"phone": phone },
-                		 	async : false
 
-
-                           }).done(function (resp) {
-                        	   
-                        	   if(resp == true){ 
-                        		   alert("인증번호가 발송되었습니다.");
-                        		   $("#verfi_btn").attr("disabled", true); 
-                        		   $("#verifi_code").attr("readonly", false); 
-                        		   
-                        		   $("#phone").on("input",function(){
-                        			   $("#verfi_btn").attr("disabled", false); 
-                        			   location.reload();
-                        			   
-                                       		   });
-                        		   
-                        		    //확인 버튼 눌렀을 때
-                                   $("#check_btn").on("click",function(){
-                        			   
-                        			   let verifi_code=$("#verifi_code").val();
-                        			   
-                        			   $.ajax({
-                                           url: "/member/doAuthNumMatch",
-                                           data: {"code": verifi_code}
-
-                                          }).done(function (resp) {
-                                        	  
-                                        	  console.log(resp);
-                                        	  
-                                        	  //입력 값 수정 불가 & 버튼 2번 클릭 못하게 해야 될듯
-                                        	  if(resp == false){
-                                        		  alert("인증번호가 일치합니다.")
-                                        		  $("#verifi_code").css("border-color", "#5397fc");
-                                        		  
-                                        		   $("#phone").on("input",function(){
-                                                   	location.reload();
-                                                   });
-                                        		  
-                                        		  //$("#phone").attr("readonly",true);
-                                        		  $("#verifi_code").attr("readonly",true);
-                                        		  $("#verfi_btn").attr("disabled", true); 
-                                        		  $("#check_btn").attr("disabled", true);
-                                        		  $("#signup_btn").attr("disabled", false);
-                                        		   
-                                        	  }else{
-                                        		  alert("인증번호가 틀립니다.");
-                                        		  $("#verifi_code").css("border-color", "red");
-                                        		  $("#signup_btn").attr("disabled", true);
-                                        	  }
-                                          });
-                        		   });
-                        	   }
-                           });
-                	/* }else{
-                		$("#phone").val("");
-                		location.reload();
-                		} */
-                })
-            
               }
 
             })
           }
 
 	});
+	
+    $("#verfi_btn").on("click", function(){	
+    	
+    	let phone=$("#phone").val();
+    	let phoneRegex=/^01\d{1}\d{3,4}\d{4}$/;
+    	
+    	if(phone != "" && phoneRegex.test(phone)){
+    	
+		//인증 번호 발송되는 에이작스
+		 $.ajax({
+            url: "/member/createAuthNum",
+             data: {"phone": phone },
+		 	async : false
+
+
+           }).done(function (resp) {
+        	   
+        	   if(resp == true){ 
+        		   alert("인증번호가 발송되었습니다.");
+        		   $("#verfi_btn").attr("disabled", true); 
+        		   $("#verifi_code").attr("readonly", false); 
+        		   
+       			$("#phone").on("input",function(){
+        			   $("#verfi_btn").attr("disabled", false); 
+        			   location.reload();
+                  });
+        		   //인증번호에 대한 결과값()
+        		   result=false;
+        		   return result;
+        	   }
+           });
+    	}else{
+    		alert("유효한 휴대폰 번호를 입력해주세요.");
+    		
+    	}
+})
+	
+	
+    //확인 버튼 눌렀을 때
+    $("#check_btn").on("click",function(){
+		   
+		   let verifi_code=$("#verifi_code").val();
+		   
+		   if(verifi_code == ""){
+			   $("#check_btn").attr("disabled", true);
+		   }else{
+			   
+			   $("#check_btn").attr("disabled", false);
+		   
+		   $.ajax({
+            url: "/member/doAuthNumMatch",
+            data: {"code": verifi_code}
+
+           }).done(function (resp) {
+         	  
+         	  console.log(resp);
+         	  
+         	  //입력 값 수정 불가 & 버튼 2번 클릭 못하게 해야 될듯
+         	  if(resp == false){
+         		  alert("인증번호가 일치합니다.")
+         		  $("#verifi_code").css("border-color", "#5397fc");
+         		  
+         		   $("#phone").on("input",function(){
+                    	location.reload();
+                    });
+         		  
+         		  //$("#phone").attr("readonly",true);
+         		  $("#verifi_code").attr("readonly",true);
+         		  $("#verfi_btn").attr("disabled", true); 
+         		  $("#check_btn").attr("disabled", true);
+         		  result= true;
+         		  return result;
+         		   
+         	  }else{
+         		  alert("인증번호가 틀립니다.");
+         		  $("#verifi_code").css("border-color", "red");
+         		  result=false;
+         		  return result;
+         	  }
+           });
+		   }
+	   });
 			
       	$("#name").on("keyup",function(){
 
