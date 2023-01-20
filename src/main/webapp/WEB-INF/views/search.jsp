@@ -596,11 +596,13 @@ text-align:right;
       $("#logoImg").on("click", function() {
          location.href = "/";
       })
+      
       $("#searchword").on("keydown", function(e) {
          if (e.keyCode == 13) {
             $("#search").submit();
          }
       })
+      
       $("#notifications").on("click", function() {
     	  let today = new Date();   
 

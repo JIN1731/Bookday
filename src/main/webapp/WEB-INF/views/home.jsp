@@ -741,7 +741,7 @@ height:fit-content;
 												<br>
 												<div class="post-main-top">
 													<div class="profile-img-div">
-														<img src="/resources/profile/${p.sysprofname}" class="profile_img">
+														<img src="/resources/profile/${p.sysprofname}" class="profile-img">
 													</div>
 													<div class="p-writer">${p.p_writer_nn }</div>
 													<div class="p-like">

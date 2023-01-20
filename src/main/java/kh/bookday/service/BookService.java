@@ -24,7 +24,6 @@ public class BookService {
 		return dao.selectBookListBySw(searchWord);
 	}
 
-	
 	//해당 도서 정보 출력
 		public BookDTO selectBookByIsbn(String b_isbn) {
 			return dao.selectBookByIsbn(b_isbn);
@@ -68,7 +67,6 @@ public class BookService {
 		public List<BookDTO> selectSteadySeller() {
 				return dao.selectSteadySeller();
 			}
-			
 
 		//신간 도서 출력 
 		public List<BookDTO> selectNewBooks() {
