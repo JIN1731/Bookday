@@ -13,7 +13,4 @@ public class BookbagDTO {
 	private String b_writer;
 	private String b_genre;
 	
-
-	
-
 }
