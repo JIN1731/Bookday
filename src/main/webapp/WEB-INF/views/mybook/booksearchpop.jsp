@@ -236,13 +236,13 @@ td {
 				"keydown",
 				function(e) {
 					if (e.keyCode == 13) {
-						var searchWord = $("#searchWord").val();
+						let searchWord = $("#searchWord").val();
 						location.href = "/book/toBookSearchPop?searchWord="
 								+ searchWord;
 					}
 				});
 		$(".searchBtn").on("click", function() {
-			var searchWord = $("#searchWord").val();
+			let searchWord = $("#searchWord").val();
 			location.href = "/book/toBookSearchPop?searchWord=" + searchWord;
 		});
 		$(document)
@@ -250,18 +250,18 @@ td {
 						"click",
 						".select",
 						function() {
-							var b_isbn = $(this).val();
-							var b_genre = $(this).closest("tr").find(
+							let b_isbn = $(this).val();
+							let b_genre = $(this).closest("tr").find(
 									".bookGenre").html();
-							var b_img_url = $(this).closest("tr").find("img")
+							let b_img_url = $(this).closest("tr").find("img")
 									.attr("src");
-							var b_title = $(this).closest("tr").find(
+							let b_title = $(this).closest("tr").find(
 									".bookTitle").children("a").html();
-							var b_writer = $(this).closest("tr").find(
+							let b_writer = $(this).closest("tr").find(
 									".bookWriter").html();
-							var b_publisher = $(this).closest("tr").find(
+							let b_publisher = $(this).closest("tr").find(
 									".bookPublisher").html();
-							var b_publication_date = $(this).closest("tr")
+							let b_publication_date = $(this).closest("tr")
 									.find(".bookPublicationDate").html();
 
 							console.log(b_isbn + b_genre + b_img_url + b_title

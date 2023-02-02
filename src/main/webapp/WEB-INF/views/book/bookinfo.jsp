@@ -1124,12 +1124,12 @@ $("#logo_img").on("click", function() {
     }
  });
 
-var swiper = new Swiper(".swiper-container", {
+let swiper = new Swiper(".swiper-container", {
 slidesPerView:3,
 spaceBetween:30
 });
 
-var swiper = new Swiper(".swiper-with", {
+let swiper = new Swiper(".swiper-with", {
 	slidesPerView:6,
 	spaceBetween:30
 	});

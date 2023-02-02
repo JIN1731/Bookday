@@ -159,6 +159,7 @@ span, #logoImg:hover {
 .signBox {
 	display: flex;
 	justify-content: flex-end;
+	text-align-last: end;
 	width:fit-content;
 }
 
@@ -843,10 +844,10 @@ height:fit-content;
 
       })
       $("#bookbag").on("click", function() {
-         if(${loginID == null}) {
+		  if(${loginID == null}) {
               location.href = "/member/toLogin";
          }else {
-              location.href = "/delivery/selectBookbagListById?id=${loginID }";
+              location.href = "/delivery/selectBookbagListById";
          }
       })
       $("#bookshelves").on("click", function() {
@@ -862,7 +863,7 @@ height:fit-content;
             return false;
             
          }else {
-         location.href = "/member/toMypage?";
+         location.href = "/member/toMypage";
          }
       })
       // 구독하기 버튼 기능
@@ -870,7 +871,7 @@ height:fit-content;
           if(${loginID == null}) {
                  location.href = "/member/toLogin";
             }else {
-                 location.href = "/delivery/toPayment?id=${loginID }";
+                 location.href = "/delivery/toPayment";
             }
       })
       
@@ -889,12 +890,12 @@ height:fit-content;
       } );
       
       //스와이퍼 라이브러리 선언
-      var swiper = new Swiper(".swiper-container", {
+      let swiper = new Swiper(".swiper-container", {
 		slidesPerView:6,
 		spaceBetween:5
 	});
       
-      var swiper = new Swiper(".swiper-container-sw", {
+      let swiper = new Swiper(".swiper-container-sw", {
     	  slidesPerView:3,
     	  spaceBetween:30
     	  });  
