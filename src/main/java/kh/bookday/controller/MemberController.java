@@ -225,7 +225,6 @@ public class MemberController {
 	public String toMypage(Model model) {
 
 		String id = (String)session.getAttribute("loginID");
-		System.out.println(id);
 
 		// 회원 정보 조회 (구독 여부 확인 & 배송지 정보 출력) 
 		MemberDTO dto = service.selectMemberById(id);

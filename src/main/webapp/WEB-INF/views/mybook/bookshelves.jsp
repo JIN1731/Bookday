@@ -726,7 +726,7 @@
 		if(${loginID == null}) {
 			location.href = "/member/toLogin";
 		}else {
-			location.href = "/delivery/selectBookbagListById?id=${loginID }";
+			location.href = "/delivery/selectBookbagListById";
 		}
 	})
 	$("#snBookshelves").on("click", function() {

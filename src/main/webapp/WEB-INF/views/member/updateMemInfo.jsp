@@ -872,7 +872,7 @@ font-size: x-small;
 				{
 					oncomplete : function(data) {
 
-						var roadAddr = data.roadAddress; // 도로명 주소 변수
+						let roadAddr = data.roadAddress; // 도로명 주소 변수
 
 						// 우편번호와 주소 정보를 해당 필드에 넣는다.
 						document.getElementById("postcode").value = data.zonecode;
