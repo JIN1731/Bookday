@@ -2,21 +2,20 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="bookday" />
+        <module name="controller" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="bookday" target="11" />
+      <module name="controller" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="bookday" options="-Xlint:all" />
+      <module name="controller" options="-Xlint:all" />
     </option>
   </component>
 </project>

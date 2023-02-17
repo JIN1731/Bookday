@@ -74,7 +74,7 @@ public class NCP_sms{
 			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 
 			//wr.write(body.getBytes());
-			wr.write(body.getBytes("utf-8"));
+			wr.write(body.getBytes("utf-8")); //인코딩
 			wr.flush();
 			wr.close();
 

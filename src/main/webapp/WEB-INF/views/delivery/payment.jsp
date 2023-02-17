@@ -462,7 +462,7 @@ li {
 	</div>
 	<script>
 		$("#pay-btn").on("click", function() {
-			var IMP = window.IMP;
+			let IMP = window.IMP;
 			IMP.init('imp78130413');
 			IMP.request_pay({
 				pg : "kakaopay",
@@ -475,11 +475,11 @@ li {
 				buyer_tel : '구매자 전화번호'
 			}, function(rsp) {
 				if (rsp.success) {
-					var msg = '결제가 완료되었습니다.';
+					let msg = '결제가 완료되었습니다.';
 					window.open("/delivery/toPaymentCompleted?id=${loginID }", "_blank", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=250, left=500, top=250");
 
 				} else {
-					var msg = '결제에 실패하였습니다.';
+					let msg = '결제에 실패하였습니다.';
 					rsp.error_msg;
 				}
 			});

@@ -829,16 +829,17 @@ span.size-30 {
 		</div>
 	</div>
 	<script>
-	
-	//프로필 사진 없을 때(수아)
+		
+	 //(기본 프로필 이미지 프론트 처리 방식)
+	 //프로필 사진이 없을 때
 	$( document ).ready( function() {
-	    
-	  	if(${p.sysprofname == '0'}){
-	  		
+
+		if(${dto.sysprofname == "" || dto.sysprofname == "0"}){
+
 			$("#profile").attr("src","/resources/basic.png");
-							return;
-						}
-	   });
+			return;
+		}
+	});
 	
 			$("#logoImg").on("click", function() {
 				location.href = "/";
@@ -895,29 +896,29 @@ span.size-30 {
 			});
 			$("#bookmarkBookSearchWord").on("keydown", function(e){
 				if(e.keyCode == 13) {
-					var searchWord = $("#bookmarkBookSearchWord").val();
+					let searchWord = $("#bookmarkBookSearchWord").val();
 					$("#bookmarkBookSearchWord").val("");
 					window.open("/book/toBookSearchPop?searchWord=" + searchWord, "", "width=600,height=600");
 				}
 			});		
 			$(".bookmarkBookSearchBtn").on("click", function() {
-				var searchWord = $("#bookmarkBookSearchWord").val();
+				let searchWord = $("#bookmarkBookSearchWord").val();
 				$("#bookmarkBookSearchWord").val("");
 				window.open("/book/toBookSearchPop?searchWord=" + searchWord, "", "width=600,height=600");
 			});
 			$("#bookmarkSearchWord").on("keydown", function(e){
 				if(e.keyCode == 13) {
-					var searchWord = $("#bookmarkSearchWord").val();
+					let searchWord = $("#bookmarkSearchWord").val();
 					location.href = "/bookmark/selectBookmarkListBySw?searchWord=" + searchWord;
 				}
 			});		
 			$(".bookmarkSearchBtn").on("click", function() {
-				var searchWord = $("#bookmarkSearchWord").val();
+				let searchWord = $("#bookmarkSearchWord").val();
 				location.href = "/bookmark/selectBookmarkListBySw?searchWord=" + searchWord;
 			});
             $(document).on("click", ".delBookmarkBtn", function () {
-                var bm_seq = $(this).closest(".bookmarkContents").attr("seq");	
-        		var bm_writer_id = $(this).closest(".bookmarkContents").attr("writer");
+                let bm_seq = $(this).closest(".bookmarkContents").attr("seq");
+        		let bm_writer_id = $(this).closest(".bookmarkContents").attr("writer");
 
                 if(confirm("북마크를 삭제하시겠습니까?")){
 					location.href="/bookmark/deleteBookmarkBySeq?bm_seq="+bm_seq+"&bm_writer_id="+bm_writer_id;

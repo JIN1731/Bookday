@@ -68,10 +68,11 @@ body {
 button:hover {
 	cursor: pointer;
 }
-button:focus{ 	
-    border: none;
-    outline:none;
-    }
+
+button:focus {
+	border: none;
+	outline: none;
+}
 /*     header */
 .header {
 	min-width: 978px;
@@ -130,7 +131,6 @@ button:focus{
 	position: absolute;
 	left: 10px;
 	right: 40px;
-	
 }
 
 .searchBtn {
@@ -384,7 +384,6 @@ span.size-30 {
 	justify-content: center;
 }
 
-
 .searchResultBookInfo td {
 	padding: 15px 15px 15px 15px;
 }
@@ -475,8 +474,7 @@ span.size-30 {
 	width: 100%;
 	display: flex;
 	align-items: center;
-		margin-bottom: 8px;
-	
+	margin-bottom: 8px;
 }
 
 .updateBooknoteTitleTitle {
@@ -506,7 +504,7 @@ span.size-30 {
 	line-height: 40px;
 	position: absolute;
 	left: 10px;
-	right:10px;
+	right: 10px;
 }
 
 /* ContentsBodyupdateBooknoteBtn */
@@ -533,7 +531,7 @@ span.size-30 {
 }
 
 /*footerHr*/
-.footerHr{
+.footerHr {
 	display: block;
 	height: 1px;
 	border: 0;
@@ -544,85 +542,87 @@ span.size-30 {
 
 /* footer */
 .footer {
-    margin:5px;
+	margin: 5px;
 }
 
-.f_header{
-    display: inline-flex;
-    margin-top:10px;
+.f_header {
+	display: inline-flex;
+	margin-top: 10px;
 }
 
-.f_header>a>img{
-    width:200px;
+.f_header>a>img {
+	width: 200px;
 }
 
-.sns_icon{
-  position: relative;
-  top:1px;
-  left:595px;
+.sns_icon {
+	position: relative;
+	top: 1px;
+	left: 595px;
 }
 
-.sns_icon>a>img{
-	  height:20px;
+.sns_icon>a>img {
+	height: 20px;
 }
 
-.business_info{
-    margin-top:30px;
+.business_info {
+	margin-top: 30px;
 }
 
-#business_info_title{
-    font-size: x-small;
-    color: #808080d6;
+#business_info_title {
+	font-size: x-small;
+	color: #808080d6;
 }
 
-.business_info>span{
-    margin-top:5px;
+.business_info>span {
+	margin-top: 5px;
 }
 
-.f_intro{
-    margin-top:15px;
-    margin-bottom:20px;
-    font-size: small;
+.f_intro {
+	margin-top: 15px;
+	margin-bottom: 20px;
+	font-size: small;
 }
 
-.f_intro>span{
-   color:#4d4b4bc1;
+.f_intro>span {
+	color: #4d4b4bc1;
 }
 
-.f_line{
-    color: #808080d6;
+.f_line {
+	color: #808080d6;
 }
 
-.business_info{
-    margin-top:20px;
-}
-#business_info_text{
-    margin-top:10px;
-    font-size: x-small;
-    color: #808080d6;
-}
-.inline_info{
-    display: inline-flex;
+.business_info {
+	margin-top: 20px;
 }
 
-#arrow_down2,#arrow_up2{
-    position: relative;
-    bottom:6px;
-    color: #808080d6;
+#business_info_text {
+	margin-top: 10px;
+	font-size: x-small;
+	color: #808080d6;
 }
 
-#arrow_up2{
-display:none;
+.inline_info {
+	display: inline-flex;
 }
 
-.sns_icon>a>img{
-    width:40px;
-    height:40px;
+#arrow_down2, #arrow_up2 {
+	position: relative;
+	bottom: 6px;
+	color: #808080d6;
 }
 
-.copyright{
-    margin-top:5px;
-    font-size: x-small;
+#arrow_up2 {
+	display: none;
+}
+
+.sns_icon>a>img {
+	width: 40px;
+	height: 40px;
+}
+
+.copyright {
+	margin-top: 5px;
+	font-size: x-small;
 }
 </style>
 <script>
@@ -642,7 +642,7 @@ display:none;
                                         callbacks: {
                                         	onImageUpload : function(files) {
                                                 // 파일 업로드(다중업로드를 위해 반복문 사용)
-                                                for (var i = files.length - 1; i >= 0; i--) {
+                                                for (let i = files.length - 1; i >= 0; i--) {
                                                 	// 이미지 아닌 것 막기
                                                 	let ext = files[i].name.split(".").pop().toLowerCase();
                                                 	let accept = ["png","jpg","jpeg","gif"];
@@ -692,23 +692,23 @@ display:none;
                             function saveContent() {
 
                                 //값 가져오기
-                                var summernoteContent = $('#summernote')
+                                let summernoteContent = $('#summernote')
                                     .summernote('code'); //썸머노트(설명)
                                 console.log("summernoteContent : "
                                     + summernoteContent);
-                                var b_isbn = $(".searchResultBookInfo").attr("isbn");
-                                var b_img_url = $("#b_img_url").attr("src");
-                                var b_title = $(".bookTitle").html();
-                                var b_writer = $(".bookWriter").html();
-                                var b_genre = $(".bookGenre").html();
-                                var b_publisher = $(".bookPublisher").html();
-                                var b_publication_date = $(".bookPublicationDate").html();
-                                var start = $("#demo").attr("start");
-                                var finish = $("#demo").attr("finish");
-								var dyst_read = $("#demo").val().substring(0,10);
-								var dyfn_read = $("#demo").val().substring(13,23);
-								var p_writer_nn = $("#contentsHeaderTxt").attr("p_writer_nn");
-                                var p_title = $("#updateBooknoteTitleTxt").val();
+                                let b_isbn = $(".searchResultBookInfo").attr("isbn");
+                                let b_img_url = $("#b_img_url").attr("src");
+                                let b_title = $(".bookTitle").html();
+                                let b_writer = $(".bookWriter").html();
+                                let b_genre = $(".bookGenre").html();
+                                let b_publisher = $(".bookPublisher").html();
+                                let b_publication_date = $(".bookPublicationDate").html();
+                                let start = $("#demo").attr("start");
+                                let finish = $("#demo").attr("finish");
+								let dyst_read = $("#demo").val().substring(0,10);
+								let dyfn_read = $("#demo").val().substring(13,23);
+								let p_writer_nn = $("#contentsHeaderTxt").attr("p_writer_nn");
+                                let p_title = $("#updateBooknoteTitleTxt").val();
 
                                 $
                                     .ajax({
@@ -730,7 +730,7 @@ display:none;
                                         },		
 
                                         success: function (data) {
-                                            var p_seq = data;
+                                            let p_seq = data;
                                             console.log(p_seq)
                                             location.href = "/booknote/selectPostByPseq?p_seq="
                                                 + p_seq;
@@ -796,7 +796,8 @@ display:none;
 				<ul>
 					<li><span class="material-symbols-outlined size-35"
 						id="snBookshelves">shelves</span></li>
-					<li><span class="material-symbols-outlined size-35" id="snCalendar">calendar_month</span></li>
+					<li><span class="material-symbols-outlined size-35"
+						id="snCalendar">calendar_month</span></li>
 					<li><span class="material-symbols-outlined size-35"
 						id="snStatistics">equalizer</span></li>
 					<li><span class="material-symbols-outlined size-35"
@@ -808,8 +809,8 @@ display:none;
 			<div class="contents">
 				<div class="contentsHeader">
 					<div id="contentsHeaderImg">
-						<img src="/resources/profile/${mdto.sysprofname }" width="100" height="100"
-							id="profile">
+						<img src="/resources/profile/${mdto.sysprofname }" width="100"
+							height="100" id="profile">
 					</div>
 					<div id="contentsHeaderTxt" p_writer_nn="${mdto.nickname }">${mdto.nickname }님&nbsp책하루와&nbsp함께한&nbsp${mdto.signup_date
 						} 하루</div>
@@ -832,14 +833,33 @@ display:none;
 									</button>
 								</div>
 							</div>
-							<div class="searchResultBookInfo" isbn="${dto.b_isbn }"><table><tr><td class="bookCover"><img src="${dto.b_img_url }" id="b_img_url"></a></td><td class="bookInfo"><p><span class="bookGenre">${dto.b_genre }</span></p><p><span class="bookTitle">${dto.b_title }</span></p><p><span class="bookWriter">${dto.b_writer }</span></p><span class="bookPublisher">${dto.b_publisher }</span><span class="between">&nbsp;|&nbsp;</span><span class="bookPublicationDate">${dto.b_publication_date }</span></td></tr></table></div>
+							<div class="searchResultBookInfo" isbn="${dto.b_isbn }">
+								<table>
+									<tr>
+										<td class="bookCover"><img src="${dto.b_img_url }"
+											id="b_img_url"></a></td>
+										<td class="bookInfo"><p>
+												<span class="bookGenre">${dto.b_genre }</span>
+											</p>
+											<p>
+												<span class="bookTitle">${dto.b_title }</span>
+											</p>
+											<p>
+												<span class="bookWriter">${dto.b_writer }</span>
+											</p> <span class="bookPublisher">${dto.b_publisher }</span><span
+											class="between">&nbsp;|&nbsp;</span><span
+											class="bookPublicationDate">${dto.b_publication_date }</span></td>
+									</tr>
+								</table>
+							</div>
 						</div>
 					</div>
 					<hr class="divider">
 					<div class="updateBooknoteDate">
 						<div class="updateBooknoteDateTitle">읽은 기간 선택</div>
 						<div class="updateBooknoteDateInput">
-							<input type="text" id="demo" name="demo" value="${dto.dyst_read } ~ ${dto.dyfn_read }">
+							<input type="text" id="demo" name="demo"
+								value="${dto.dyst_read } ~ ${dto.dyfn_read }">
 							<button class="updateBooknoteDateBtn">
 								<span class="material-symbols-outlined"> calendar_month </span>
 							</button>
@@ -850,7 +870,8 @@ display:none;
 						<div class="updateBooknoteTitleTitle">제목</div>
 						<div class="updateBooknoteTitleBox">
 							<input type="text" id="updateBooknoteTitleTxt"
-								placeholder="제목을 입력해주세요." maxlength="101" value="${dto.p_title }">
+								placeholder="제목을 입력해주세요." maxlength="101"
+								value="${dto.p_title }">
 
 						</div>
 					</div>
@@ -871,9 +892,10 @@ display:none;
 
 				<div class="sns_icon">
 					<a href="#"><img src="/resources/instagram.png" id="insta"></a>
-					<a href="#"><img src="/resources/facebook.png" id="facebook"></a> 
-					<a href="#"><img src="/resources/twitter_black.png" id="twitter"></a>
-					<a href="#"><img src="/resources/youtube.png" id="youtube"></a>
+					<a href="#"><img src="/resources/facebook.png" id="facebook"></a>
+					<a href="#"><img src="/resources/twitter_black.png"
+						id="twitter"></a> <a href="#"><img
+						src="/resources/youtube.png" id="youtube"></a>
 				</div>
 
 			</div>
@@ -885,13 +907,11 @@ display:none;
 				</div>
 
 				<div id="business_info_text">
-					<span>대표자 성태조 </span>
-					<span> | </span>
-					<span> 사업자 등록번호 01-20-22015</span>
+					<span>대표자 성태조 </span> <span> | </span> <span> 사업자 등록번호
+						01-20-22015</span>
 					<p>주소 서울특별시 중구 남대문로 120 그레이츠 청계(구 대일빌딩) 3F</p>
-					<span>대표전화 1544-9970 </span>
-					<span> | </span>
-					<span> 이메일 help@bookday.com</span>
+					<span>대표전화 1544-9970 </span> <span> | </span> <span> 이메일
+						help@bookday.com</span>
 				</div>
 			</div>
 
@@ -903,10 +923,22 @@ display:none;
 			</div>
 			<p class="copyright">Copyright © 2022 책하루 All Rights Reserved.</p>
 			<!-- <p class="copyright">©BOOKDAY Corp.</p> -->
-		</div>	
+		</div>
 	</div>
+
+	<script>
+
+				//(기본 프로필 이미지 프론트 처리 방식)
+				//프로필 사진이 없을 때
+				$( document ).ready( function() {
 		
-<script>
+				if(${dto.sysprofname == "" || dto.sysprofname == "0"}){
+		
+					$("#profile").attr("src","/resources/basic.png");
+					return;
+				}
+					});
+				
                 $("#logoImg").on("click", function () {
                     location.href = "/";
                 })
@@ -954,7 +986,7 @@ display:none;
                 })
                 $("#booknoteBookSearchWord").on("keydown", function (e) {
                     if (e.keyCode == 13) {
-                        var searchWord = $("#booknoteBookSearchWord").val();
+                        let searchWord = $("#booknoteBookSearchWord").val();
                         $("#booknoteBookSearchWord").val("");
                         window.open("/book/toBookSearchPop?searchWord="
                             + searchWord, "", "width=600,height=600");
@@ -963,7 +995,7 @@ display:none;
                 $(".booknoteBookSearchBtn").on(
                     "click",
                     function () {
-                        var searchWord = $("#booknoteBookSearchWord").val();
+                        let searchWord = $("#booknoteBookSearchWord").val();
                         window.open("/book/toBookSearchPop?searchWord="
                             + searchWord, "", "width=600,height=600");
                         $("#booknoteBookSearchWord").val("");
