@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.bookday.dto.BookDTO;
@@ -63,5 +64,14 @@ public class HomeController {
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();
 		return "error";
+	}
+
+	//책 데이터 가져오기
+	@GetMapping("getBookData")
+	public String getBookData() throws Exception{
+
+		service.setBookData();
+		return "/";
+
 	}
 }

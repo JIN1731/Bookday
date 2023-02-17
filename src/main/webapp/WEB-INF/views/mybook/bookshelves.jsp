@@ -546,7 +546,7 @@
 					<img src="/resources/profile/${dto.sysprofname}" width="100" height="100"
 						 id="profile">
 				</div>
-				<div id="contentsHeaderTxt">${dto.nickname }님&nbsp책하루와&nbsp함께한&nbsp${dto.signup_date
+				<div id="contentsHeaderTxt">${dto.nickname}님&nbsp책하루와&nbsp함께한&nbsp${dto.signup_date
 						} 하루</div>
 			</div>
 			<div class="contentsBody">
@@ -751,12 +751,13 @@
 	})
 
 
-	//포스트 프로필 사진 없을 때(수아)
+	 //(기본 프로필 이미지 프론트 처리 방식)
+ 	 //프로필 사진이 없을 때
 	$( document ).ready( function() {
 
-		if(${p.sysprofname == '0'}){
+		if(${dto.sysprofname == "" || dto.sysprofname == "0"}){
 
-			$(".profile_img").attr("src","/resources/basic.png");
+			$("#profile").attr("src","/resources/basic.png");
 			return;
 		}
 	});

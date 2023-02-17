@@ -77,9 +77,9 @@ public class MemberService {
 		return dao.selectIdByPhone(phone);
 	}
 
-
-	public boolean selectByEmail(String email) {
-		return dao.selectByEmail(email);
+	
+	public boolean selectByKid(String id) {
+		return dao.selectByKid(id);
 	}
 
 	public void updatePw(String pw,String phone) {

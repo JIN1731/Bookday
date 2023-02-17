@@ -918,6 +918,8 @@
 </div>
 
 <script>
+	
+	
     $("#logoImg").on("click", function () {
         location.href = "/";
     })

@@ -218,7 +218,7 @@ text-align:right;
 	text-align: center;
 }
 
-#prof_img {
+#profile {
 	border-radius: 50%;
 	width: 120px;
 	height: 120px;
@@ -418,7 +418,7 @@ text-align:right;
 		<div class="navi"></div>
 		<div class="body">
 			<div class="prof_img">
-				<img src="/resources/profile/${dto.sysprofname}" id="prof_img">
+				<img src="/resources/profile/${dto.sysprofname}" id="profile">
 			</div>
 			<div class="body-top">${dto.nickname }</div>
 			<c:choose>
@@ -585,16 +585,17 @@ text-align:right;
 		</div>
 	</div>
 	<script>
-    //프로필 사진 없을 때
+	
+	 //(기본 프로필 이미지 프론트 처리 방식)
+	 //프로필 사진이 없을 때
 	$( document ).ready( function() {
-		
-	    
-	  	if(${dto.sysprofname == '0'}){
-	  		
-	  		$("#prof_img").attr("src","/resources/basic.png");
-							return;
-						}
-	   });
+
+		if(${dto.sysprofname == "" || dto.sysprofname == "0"}){
+
+			$("#profile").attr("src","/resources/basic.png");
+			return;
+		}
+	});
 	
       $("#logoImg").on("click", function() {
          location.href = "/";

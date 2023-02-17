@@ -173,14 +173,14 @@ span, #logoImg:hover {
 	color: #5397fc;
 }
 
-#login{
-width:100px;
-text-align:right;
+#login {
+	width: 100px;
+	text-align: right;
 }
 
 #nick {
 	text-decoration: none;
-	width:100px;
+	width: 100px;
 }
 
 #nick:hover {
@@ -219,10 +219,9 @@ text-align:right;
 .prof_img {
 	padding-bottom: 20px;
 	text-align: center;
-	
 }
 
-#prof_img {
+#profile {
 	border-radius: 50%;
 	width: 120px;
 	height: 120px;
@@ -255,7 +254,7 @@ text-align:right;
 	padding-bottom: 15px;
 	font-weight: bold;
 	padding-bottom: 5px;
-	line-height:30px;
+	line-height: 30px;
 }
 
 .body-right {
@@ -279,8 +278,8 @@ text-align:right;
 	background-color: #5397fc;
 }
 
-.mem_info{
-	margin-bottom:50px;
+.mem_info {
+	margin-bottom: 50px;
 }
 
 .input-file-button {
@@ -290,13 +289,14 @@ text-align:right;
 	border: 1px solid #5397fc;
 	color: #5397fc;
 	cursor: pointer;
-	position:relative;
-	left:310px;
+	position: relative;
+	left: 310px;
 }
-.input, .pw_input{
+
+.input, .pw_input {
 	border-radius: 4px;
 	border: 1px solid #d5d5d5;
-	height:33px;
+	height: 33px;
 }
 
 .body_btn, input[type=button] {
@@ -308,28 +308,31 @@ text-align:right;
 	border-radius: 8px;
 	color: #5397fc;
 }
-.btns { 
 
-margin-bottom:10px;
-	position:relative;
-	top:5px;
-	left:600px;
+.btns {
+	margin-bottom: 10px;
+	position: relative;
+	top: 5px;
+	left: 600px;
 }
-#input_btn{
-	width: 10%;/
-	margin-top:10px;
-}
-.must{
-	color:red;
-	cursor:default;
-}
-.hidden{
-	color:white;
-	cursor:default;
-}
-#pw_result, #n_result, #nk_result, #email_result, #check_pw_result{
-font-size: x-small;
 
+#input_btn {
+	width: 10%; /
+	margin-top: 10px;
+}
+
+.must {
+	color: red;
+	cursor: default;
+}
+
+.hidden {
+	color: white;
+	cursor: default;
+}
+
+#pw_result, #n_result, #nk_result, #email_result, #check_pw_result {
+	font-size: x-small;
 }
 
 /* footer */
@@ -465,12 +468,16 @@ font-size: x-small;
 
 		<div class="body">
 
-			<form action="/member/updateMemInfo" method="post" enctype="multipart/form-data" id="updateMemInfo">
+			<form action="/member/updateMemInfo" method="post"
+				enctype="multipart/form-data" id="updateMemInfo">
 
 				<div class="prof_img">
-					<img src="/resources/profile/${dto.sysprofname}" id="prof_img">
+					<img src="/resources/profile/${dto.sysprofname}" id="profile" />
 				</div>
 
+				<!-- 기존 dto 값 가져와서 변화가 없으면 이 값을 가져가게 하기 -->
+				<input type="hidden" name="sys" value="${dto.sysprofname}">
+				<input type="hidden" name="ori" value="${dto.oriprofname}">
 				<label class="input-file-button" for="img_upload"
 					id="input_file_btn">편집</label> <input type="file" name="prof_img"
 					class="input_file" id="img_upload"
@@ -479,121 +486,147 @@ font-size: x-small;
 				<div class="mem_info">
 					<div class="body-title-mem">회원정보</div>
 					<hr class="body-hr">
-					
-					<div class="body-left"><span class="must">*</span>이름</div>
-					<div class="body-right">
-						<input type="text" name="name" value="${dto.name}" 
-							class="input" id="name" maxlength="5" required>
-							<span id="n_result"></span>
+
+					<div class="body-left">
+						<span class="must">*</span>이름
 					</div>
-					
-					<div class="body-left"><span class="must">*</span>닉네임</div>
+					<div class="body-right">
+						<input type="text" name="name" value="${dto.name}" class="input"
+							id="name" maxlength="5" required> <span id="n_result"></span>
+					</div>
+
+					<div class="body-left">
+						<span class="must">*</span>닉네임
+					</div>
 					<div class="body-right">
 						<input type="text" name="nickname" value="${dto.nickname}"
-							 class="input" id="nickname" maxlength="10" required>
-					<span id="nk_result"></span>
+							class="input" id="nickname" maxlength="10" required> <span
+							id="nk_result"></span>
 					</div>
-					<div class="body-left"><span class="must">*</span>휴대폰 번호</div>
-							<div class="body-right">
-								<input type="text" name="phone" value="${dto.phone}" 
-									class="input" id="phone" maxlength="11" required>
-								<button type="button" class="body_btn" id="phone_btn">인증</button>
-		
-							</div>
-								<div class="body-left" id="code"><span class="hidden">*</span>인증번호</div>
-							<div class="body-right">
-								<input type="text" name="check_phone" placeholder="인증번호"
-										id="verifi_code" class="input">
-									<button type="button" class="body_btn" id="check_btn">확인</button>
-								</div>
-						
-					<div class="body-left"><span class="must">*</span>이메일</div>
+					<div class="body-left">
+						<span class="must">*</span>휴대폰 번호
+					</div>
 					<div class="body-right">
-						<input type="text" name="email" value="${dto.email}" 
-							class="input" id="email">
-							<span id="email_result"></span>
+						<input type="text" name="phone" value="${dto.phone}" class="input"
+							id="phone" maxlength="11" required>
+						<button type="button" class="body_btn" id="phone_btn">인증</button>
+
 					</div>
-				
-					<div class="body-left"><span class="must">*</span>비밀번호</div>
+					<div class="body-left" id="code">
+						<span class="hidden">*</span>인증번호
+					</div>
+					<div class="body-right">
+						<input type="text" name="check_phone" placeholder="인증번호"
+							id="verifi_code" class="input">
+						<button type="button" class="body_btn" id="check_btn">확인</button>
+					</div>
+
+					<div class="body-left">
+						<span class="must">*</span>이메일
+					</div>
+					<div class="body-right">
+						<input type="text" name="email" value="${dto.email}" class="input"
+							id="email"> <span id="email_result"></span>
+					</div>
+
+					<div class="body-left">
+						<span class="must">*</span>비밀번호
+					</div>
 					<div class="body-right">
 
-						<input type="password" name="pw"
-							placeholder="새 비밀번호" class="pw_input" id="pw" maxlength="16">
-					
-						<input type="password" name="new_pw_check"
-							placeholder="새 비밀번호 확인" class="pw_input" id="check_pw" maxlength="16">
-						<span id="pw_result"></span> 
-						<span id="check_pw_result"></span>
+						<input type="password" name="pw" placeholder="새 비밀번호"
+							class="pw_input" id="pw" maxlength="16"> <input
+							type="password" name="new_pw_check" placeholder="새 비밀번호 확인"
+							class="pw_input" id="check_pw" maxlength="16"> <span
+							id="pw_result"></span> <span id="check_pw_result"></span>
 					</div>
-		
-					<div class="body-left"><span class="hidden">*</span>주소</div>
+
+					<div class="body-left">
+						<span class="hidden">*</span>주소
+					</div>
 					<div class="body-right">
 						<input type="text" id="address1" name="address1"
-							value="${dto.address1}"  placeholder="도로명 주소"
-							class="input">
+							value="${dto.address1}" placeholder="도로명 주소" class="input">
 						<button type="button" id="search_btn" class="body_btn"
-						onclick="execDaumPostcode()">찾기</button>
+							onclick="execDaumPostcode()">찾기</button>
 					</div>
-					<div class="body-left"><span class="hidden">*</span>상세주소</div>
+					<div class="body-left">
+						<span class="hidden">*</span>상세주소
+					</div>
 					<div class="body-right">
 						<input type="text" name="address2" value="${dto.address2}"
-							 placeholder="상세 주소" class="input">
+							placeholder="상세 주소" class="input">
 					</div>
-					<div class="body-left"><span class="hidden">*</span>우편번호</div>
+					<div class="body-left">
+						<span class="hidden">*</span>우편번호
+					</div>
 					<div class="body-right">
 						<input type="text" name="postcode" value="${dto.postcode}"
-							 placeholder="우편번호" class="input" id="postcode">
+							placeholder="우편번호" class="input" id="postcode">
 					</div>
-					
+
 				</div>
-			<hr style="border-top: 1px rgb(216, 216, 216);">
+				<hr style="border-top: 1px rgb(216, 216, 216);">
 				<div class="btns">
 					<button type="button" class="body_btn" id="fin_btn">완료</button>
 					<button type="button" class="body_btn" id="cancel_btn">취소</button>
 				</div>
 			</form>
 		</div>
-	<!-- body -->
+		<!-- body -->
 
-	<div class="footer">
-		<hr style="border-top: 1px solid rgb(216, 216, 216);">
-		<div class="f_header">
-			<a href="/"><img src="/resources/bookday_logotitle.png"></a>
+		<div class="footer">
+			<hr style="border-top: 1px solid rgb(216, 216, 216);">
+			<div class="f_header">
+				<a href="/"><img src="/resources/bookday_logotitle.png"></a>
 
-			<div class="sns_icon">
-				<a href="#"><img src="/resources/instagram.png" class="sns"></a>
-				<a href="#"><img src="/resources/facebook.png" class="sns"></a>
-				<a href="#"><img src="/resources/twitter_black.png" class="sns"></a>
-				<a href="#"><img src="/resources/youtube.png" class="sns"></a>
+				<div class="sns_icon">
+					<a href="#"><img src="/resources/instagram.png" class="sns"></a>
+					<a href="#"><img src="/resources/facebook.png" class="sns"></a>
+					<a href="#"><img src="/resources/twitter_black.png" class="sns"></a>
+					<a href="#"><img src="/resources/youtube.png" class="sns"></a>
+				</div>
+
+			</div>
+			<div class="business_info">
+				<div class="inline_info">
+					<div id="business_info_title">사업자 정보</div>
+					<span class="arrow_icon material-symbols-outlined" id="arrow_down2">keyboard_arrow_down</span>
+					<span class="arrow_icon material-symbols-outlined" id="arrow_up2">keyboard_arrow_up</span>
+				</div>
+
+				<div id="business_info_text">
+					<span>대표자 성태조 </span> <span> | </span> <span> 사업자 등록번호
+						01-20-22015</span>
+					<p>주소 서울특별시 중구 남대문로 120 그레이츠 청계(구 대일빌딩) 3F</p>
+					<span>대표전화 1544-9970 </span> <span> | </span> <span> 이메일
+						help@bookday.com</span>
+				</div>
 			</div>
 
-		</div>
-		<div class="business_info">
-			<div class="inline_info">
-				<div id="business_info_title">사업자 정보</div>
-				<span class="arrow_icon material-symbols-outlined" id="arrow_down2">keyboard_arrow_down</span>
-				<span class="arrow_icon material-symbols-outlined" id="arrow_up2">keyboard_arrow_up</span>
+			<div class="f_intro">
+				<span>회사소개</span> <span class="f_line">|</span> <span>이용약관</span> <span
+					class="f_line">|</span> <span>개인정보처리방침</span> <span class="f_line">|</span>
+				<span>청소년보호정책</span> <span class="f_line">|</span> <span>제휴
+					문의</span>
 			</div>
-
-			<div id="business_info_text">
-				<span>대표자 성태조 </span> <span> | </span> <span> 사업자 등록번호
-					01-20-22015</span>
-				<p>주소 서울특별시 중구 남대문로 120 그레이츠 청계(구 대일빌딩) 3F</p>
-				<span>대표전화 1544-9970 </span> <span> | </span> <span> 이메일
-					help@bookday.com</span>
-			</div>
+			<p class="copyright">Copyright © 2022 책하루 All Rights Reserved.</p>
+			<!-- <p class="copyright">©BOOKDAY Corp.</p> -->
 		</div>
-
-		<div class="f_intro">
-			<span>회사소개</span> <span class="f_line">|</span> <span>이용약관</span> <span
-				class="f_line">|</span> <span>개인정보처리방침</span> <span class="f_line">|</span>
-			<span>청소년보호정책</span> <span class="f_line">|</span> <span>제휴 문의</span>
-		</div>
-		<p class="copyright">Copyright © 2022 책하루 All Rights Reserved.</p>
-		<!-- <p class="copyright">©BOOKDAY Corp.</p> -->
-	</div>
 	</div>
 	<script>
+	
+ 	 //(기본 프로필 이미지 프론트 처리 방식)
+ 	 //프로필 사진이 없을 때
+	$( document ).ready(function() {
+  
+ 	if(${dto.sysprofname == "" || dto.sysprofname =="0"}){
+ 		
+	$("#profile").attr("src","/resources/basic.png");
+		  return;
+					}
+	});
+ 	 
 
       $("#logo_img").on("click", function() {
          location.href = "/";
@@ -632,20 +665,18 @@ font-size: x-small;
          }
       })
       
-      	
-	$( document ).ready(function() {
-	    //프로필 사진 없을 때
-	  	if(${dto.sysprofname == '0'}){
-	  		
-		$("#prof_img").attr("src","/resources/basic.png");
-							return;
-						}
-	});
+
+	  //유효성 로직
+	  let nicknameRegex=/[가-힣 a-z A-Z 0-9]{2,10}/;
+	  let pwRegex=/^[A-Z a-z 0-9 ! @ $ % -]{8,16}$/;
+	  let emailRegex=/^[a-z 0-9 A-Z]{3,12}@[A-Z a-z]{5,7}.[a-zA-Z]{2,3}$/;
+	  let nameRegex=/[가-힣]{2,5}/;
+	  let phoneRegex=/^01\d{1}\d{3,4}\d{4}$/;
+
 
       //닉네임 중복 확인
    	$("#nickname").on("input",function(){
 			let nickname=$("#nickname").val();
-			let nicknameRegex=/[가-힣 a-z A-Z 0-9]{2,10}/;
 
 			   //닉네임 유효성 검사      
 			if(!nicknameRegex.test(nickname) && nickname != ""){
@@ -687,8 +718,6 @@ font-size: x-small;
 
 		let pw=$("#pw").val();
 		let check_pw=$("#check_pw").val();
-        
-		   let pwRegex=/^[A-Z a-z 0-9 ! @ $ % -]{8,16}$/;
 
 		   //비밀번호 유효성 검사 및 중복 검사
 		   if(!pwRegex.test(pw) && pw != ""){
@@ -717,7 +746,7 @@ font-size: x-small;
 	$("#email").on("input",function(){
 
 		let email=$("#email").val();
-		let emailRegex=/^[a-z 0-9 A-Z]{3,12}@[A-Z a-z]{5,7}.[a-zA-Z]{2,3}$/;
+
 
 		   //이메일 유효성 검사
 		   if(!emailRegex.test(email) && email != ""){
@@ -739,7 +768,6 @@ font-size: x-small;
  	$("#name").on("input",function(){
 
 		let name= $("#name").val();
-        let nameRegex=/[가-힣]{2,5}/;
         
         console.log(name);
 
@@ -759,13 +787,10 @@ font-size: x-small;
 
 		});
 	  
- 	 
- 	
       //휴대폰 인증 버튼 누르면
       $("#phone_btn").on("click", function() {
     	   
  			let phone=$("#phone").val();
- 			let phoneRegex=/^01\d{1}\d{3,4}\d{4}$/;
     	  
     	  console.log($("#phone").val());
     	  
@@ -824,7 +849,7 @@ font-size: x-small;
     	  let nickname=$("#nickname").val();
     	  let phone=$("#phone").val();
     	  let email=$("#email").val();
-    	  
+
     	   console.log(name+nickname+phone+email+pw+check_pw);
     	   
     	if(pw=="" || name == "" || nickname == "" || phone == "" || email ==""){
@@ -832,7 +857,9 @@ font-size: x-small;
               console.log(name+nickname+phone+email+pw+check_pw);
     		  alert("필수값을 입력해주세요.");
 
-              }else{
+              }else if(!pwRegex.test(pw) || !nameRegex.test(name) || !nicknameRegex.test(nickname) || !emailRegex.test(email) || !phoneRegex.test(phone)){
+			  alert("유효한 값을 입력해주세요.");
+			}else{
             	  alert("수정되었습니다.");
             	  $("#updateMemInfo").submit();
               } 
@@ -888,7 +915,7 @@ font-size: x-small;
 	        const reader = new FileReader();
 	         reader.readAsDataURL(file)
 	         reader.onload = () => {
-	          $("#prof_img").attr("src", reader.result)
+	          $("#profile").attr("src", reader.result)
 	            console.dir(reader.result)   // base64
 	         }
 	}
@@ -897,7 +924,7 @@ font-size: x-small;
 							console.log($("#img_upload").val());
 							
 							if($("#img_upload").val() == ""){
-									$("#prof_img").attr("src","/resources/basic.png");
+									$("#profile").attr("src","/resources/basic.png");
 								return;
 							}
 							

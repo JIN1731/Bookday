@@ -414,6 +414,8 @@ span, #logoImg:hover {
 	text-align: center;
 }
 
+
+/* 수정 필요 */
 .user_btn {
 	display: inline;
 	position: relative;
@@ -1124,25 +1126,25 @@ $("#logo_img").on("click", function() {
     }
  });
 
-let swiper = new Swiper(".swiper-container", {
+let swiper1 = new Swiper(".swiper-container", {
 slidesPerView:3,
 spaceBetween:30
 });
 
-let swiper = new Swiper(".swiper-with", {
+let swiper2 = new Swiper(".swiper-with", {
 	slidesPerView:6,
 	spaceBetween:30
 	});
 	
 //프로필 사진 없을 때
-/* $( document ).ready( function() {
+$( document ).ready( function() {
     
-  	if(${p.sysprofname != null}){
+  	if(${p.sysprofname != ""}){
   		
 		$(".profile_img").attr("src","/resources/basic.png");
 						return;
 					}
-   }); */
+   });
 
 
 $(document).ready(function(){
@@ -1315,13 +1317,14 @@ $(document).ready(function(){
 
                                 /* var rv_seq=$(".r_update").data("seq");  */
                                 /* var rv_content=$(".r_update").data("content"); */
+                                
 
                          let rv_seq = $(this).attr("data-seq");
                          let b_isbn = $("#b_isbn").val();
 
-                                console.log(rv_seq);
+                             console.log(rv_seq);
 
-                            $(this).closest(".r_title_box").find(".content").attr("readonly", false);
+                            $(this).closest(".r_title_box").find(".content").attr("contenteditable",true);
 
                              $(this).closest(".r_title_box").find(".r_update,.r_delete").css("display", "none");
 
@@ -1359,7 +1362,7 @@ $(document).ready(function(){
                                         .val();
                                 let rv_content = $(this).closest(
                                         ".r_title_box")
-                                        .find(".content").val();
+                                        .find(".content").html();
                                 let b_isbn = $(this).attr("data-isbn");
 
                                 console.log(rv_content);

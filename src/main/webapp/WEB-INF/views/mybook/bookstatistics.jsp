@@ -650,6 +650,18 @@ display:none;
 		</div>
 	</div>
 	<script>
+			
+	 //(기본 프로필 이미지 프론트 처리 방식)
+	 //프로필 사진이 없을 때
+	$( document ).ready( function() {
+
+		if(${dto.sysprofname == "" || dto.sysprofname == "0"}){
+
+			$("#profile").attr("src","/resources/basic.png");
+			return;
+		}
+	});
+	
 			$("#logoImg").on("click", function() {
 				location.href = "/";
 			});

@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<head profile="http://www.w3.org/2005/10/profile">
 <meta charset="UTF-8">
 <title>Home</title>
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -776,6 +775,7 @@ height:fit-content;
 					</div>
 				</div>
 			</div>
+		</div>
 			<!-- body -->
 			
 			<div class="footer">
@@ -819,7 +819,6 @@ height:fit-content;
 				<!-- <p class="copyright">©BOOKDAY Corp.</p> -->
 			</div>
 
-		</div>
 		</div>
 
 		<script>
@@ -885,21 +884,21 @@ height:fit-content;
        }); 
       
       //스크롤 이벤트 라이브러리(AOS)선언
-       $( document).ready( function() {
+       $(document).ready( function() {
         AOS.init();
       } );
       
       //스와이퍼 라이브러리 선언
-      let swiper = new Swiper(".swiper-container", {
+      let swiper1 = new Swiper(".swiper-container", {
 		slidesPerView:6,
 		spaceBetween:5
 	});
       
-      let swiper = new Swiper(".swiper-container-sw", {
+      let swiper2 = new Swiper("swiper-container-sw", {
     	  slidesPerView:3,
     	  spaceBetween:30
     	  });  
-      
+     
 
         //footer: 사업자 정보 토글 기능
        $("#business_info_text").hide();

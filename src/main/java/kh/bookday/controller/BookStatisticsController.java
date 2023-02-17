@@ -65,7 +65,6 @@ public class BookStatisticsController {
 		return new Gson().toJson(service.selectPostListById(id));
 	}
 
-
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();

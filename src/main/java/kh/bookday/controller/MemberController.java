@@ -198,8 +198,8 @@ public class MemberController {
 
 		System.out.println(userInfo.getId());
 
-		//카카오 최초 로그인인지 확인-> 디비에서 이메일 정보 확인
-		boolean result=service.selectByEmail(userInfo.getEmail());
+		//카카오 최초 로그인인지 확인-> 디비에서 카카오에서 부여한 아이디 정보 확인
+		boolean result=service.selectByKid(userInfo.getId());
 
 		System.out.println(result);
 
@@ -257,7 +257,7 @@ public class MemberController {
 
 	//마이페이지 회원정보수정
 	@RequestMapping(value="updateMemInfo")
-	public String updateMemInfo(MemberDTO dto, MultipartFile[] prof_img) {
+	public String updateMemInfo(MemberDTO dto, MultipartFile[] prof_img, @RequestParam("sys") String sys, @RequestParam("ori") String ori) {
 		
 		String id = String.valueOf(session.getAttribute("loginID"));
 		
@@ -269,8 +269,9 @@ public class MemberController {
 		String updatedPw=Pw_SHA256.getSHA256(dto.getPw());
 			dto.setPw(updatedPw);
 			
-			System.out.println(updatedPw);
-		
+			System.out.println(ori);
+			System.out.println(sys);
+			
 		//파일 관련 업데이트 업로드 참고
 		String realPath= session.getServletContext().getRealPath("/resources/profile");
 		
@@ -278,6 +279,7 @@ public class MemberController {
 		
 		if(!filePath.exists()) {filePath.mkdir();}
 
+		//파일이 수정되었을 때
 		if(!prof_img[0].getOriginalFilename().equals("")) {
 			
 			for(MultipartFile file : prof_img) {
@@ -286,29 +288,39 @@ public class MemberController {
 				String oriprofname= file.getOriginalFilename();
 				String sysprofname= UUID.randomUUID()+"_"+oriprofname;
 				
-				//파일 입력
-				dto.setOriprofname(oriprofname);
-				dto.setSysprofname(sysprofname);
-				
-				try {
-					file.transferTo(new File(filePath+"/"+sysprofname));
-				} catch (IllegalStateException | IOException e) {
-					e.printStackTrace();
+
+					//파일 입력
+					dto.setOriprofname(oriprofname);
+					dto.setSysprofname(sysprofname);
+					
+					try {
+						file.transferTo(new File(filePath+"/"+sysprofname));
+						
+						service.updateMemInfo(dto);
+						
+					} catch (IllegalStateException | IOException e) {
+						e.printStackTrace();
+					}
+					
 				}
-				System.out.println(dto);
+			
+			}else{
 				
-				System.out.println(dto.getAddress1());
-				System.out.println(dto.getAddress2());
+				//기존 파일이 변화가 없을 때 
+				dto.setOriprofname(ori);
+				dto.setSysprofname(sys);
 				
 				service.updateMemInfo(dto);
-				
-				session.invalidate();
-				
-				session.setAttribute("loginID",id);
-				session.setAttribute("nickname",dto.getNickname());
+
 			}
-			
-		}return "redirect:toMypage";
+		
+		//기존 세션 제거 후 새로운 세션 발급
+		session.invalidate();
+		
+		session.setAttribute("loginID",id);
+		session.setAttribute("nickname",dto.getNickname());
+
+		return "redirect:toMypage";
 	}
 
 	//에러 수집
